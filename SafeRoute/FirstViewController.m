@@ -19,9 +19,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:-33.86
-                                                            longitude:151.20
-                                                                 zoom:6];
+	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:28.654601
+                                                            longitude:77.234389
+                                                                 zoom:10];
     
     gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
     [self.view addSubview:gMapView];
@@ -32,10 +32,25 @@
     
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(-33.86, 151.20);
-    marker.title = @"Sydney";
-    marker.snippet = @"Australia";
+    marker.position = CLLocationCoordinate2DMake(28.654601,77.234389);
+    marker.title = @"Chandni Chowk Area";
+    marker.snippet = @"India";
     marker.map = gMapView;
+    UIColor *THREAT_LEVEL1_COLOR = [UIColor colorWithRed:(253/255.0f) green:(65/255.0f) blue:(1/255.0f) alpha:0.7];
+    UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
+
+    [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:750 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
+    [self createCircleWithColor:THREAT_LEVEL2_COLOR withRadius:500 atPosition:CLLocationCoordinate2DMake(28.554601,77.234389)];
+}
+
+-(void)createCircleWithColor:(UIColor*)color withRadius:(float) radius atPosition: (CLLocationCoordinate2D) position {
+    GMSCircle *circle = [[GMSCircle alloc] init];
+    [circle setMap: gMapView];
+    [circle setPosition: position];
+    [circle setFillColor: color];
+    [circle setRadius: radius];
+    [circle setZIndex: 10];
+    [circle setStrokeWidth: 1];
 }
 
 - (void)didReceiveMemoryWarning
