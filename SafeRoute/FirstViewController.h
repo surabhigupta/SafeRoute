@@ -14,5 +14,8 @@
 }
 
 @property (nonatomic, retain) GMSMapView *gMapView;
+@property (nonatomic, retain) IBOutlet UITextField *locationField;
+@property (nonatomic, retain) IBOutlet UITextField *destinationField;
+@property (nonatomic, retain) IBOutlet UIButton *mapButton;
 
 @end

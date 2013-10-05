@@ -14,7 +14,7 @@
 @end
 
 @implementation FirstViewController
-@synthesize gMapView;
+@synthesize gMapView, locationField, destinationField, mapButton;
 
 - (void)viewDidLoad
 {
@@ -23,7 +23,7 @@
                                                             longitude:151.20
                                                                  zoom:6];
     
-    gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 100, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
+    gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
     [self.view addSubview:gMapView];
     // Create a GMSCameraPosition that tells the map to display the
     // coordinate -33.86,151.20 at zoom level 6.
@@ -42,6 +42,11 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(IBAction)map:(id)sender
+{
+    
 }
 
 @end
