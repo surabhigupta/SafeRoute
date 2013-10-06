@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		412815DA1800E7D4008071D2 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 412815D91800E7D4008071D2 /* GoogleMaps.framework */; };
+		412815DC1800E7DB008071D2 /* GoogleMaps in Resources */ = {isa = PBXBuildFile; fileRef = 412815DB1800E7DB008071D2 /* GoogleMaps */; };
 		52F26E4A1800AACD00480818 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E491800AACD00480818 /* Foundation.framework */; };
 		52F26E4C1800AACD00480818 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E4B1800AACD00480818 /* CoreGraphics.framework */; };
 		52F26E4E1800AACD00480818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E4D1800AACD00480818 /* UIKit.framework */; };
@@ -22,8 +24,6 @@
 		52F26E6E1800AACD00480818 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E4D1800AACD00480818 /* UIKit.framework */; };
 		52F26E761800AACD00480818 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 52F26E741800AACD00480818 /* InfoPlist.strings */; };
 		52F26E781800AACD00480818 /* SafeRouteTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52F26E771800AACD00480818 /* SafeRouteTests.m */; };
-		52F26E821800B1D700480818 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E811800B1D700480818 /* GoogleMaps.framework */; };
-		52F26E841800B23200480818 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 52F26E831800B23200480818 /* GoogleMaps.bundle */; };
 		52F26E861800B24E00480818 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E851800B24E00480818 /* AVFoundation.framework */; };
 		52F26E881800B25500480818 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E871800B25500480818 /* CoreData.framework */; };
 		52F26E8A1800B25C00480818 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52F26E891800B25C00480818 /* CoreLocation.framework */; };
@@ -51,6 +51,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		412815D91800E7D4008071D2 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		412815DB1800E7DB008071D2 /* GoogleMaps */ = {isa = PBXFileReference; lastKnownFileType = file; path = GoogleMaps; sourceTree = "<group>"; };
 		52F26E461800AACD00480818 /* SafeRoute.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SafeRoute.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		52F26E491800AACD00480818 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		52F26E4B1800AACD00480818 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -72,8 +74,6 @@
 		52F26E731800AACD00480818 /* SafeRouteTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SafeRouteTests-Info.plist"; sourceTree = "<group>"; };
 		52F26E751800AACD00480818 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		52F26E771800AACD00480818 /* SafeRouteTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SafeRouteTests.m; sourceTree = "<group>"; };
-		52F26E811800B1D700480818 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		52F26E831800B23200480818 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		52F26E851800B24E00480818 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		52F26E871800B25500480818 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		52F26E891800B25C00480818 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -101,6 +101,7 @@
 				52F26EA01800D21A00480818 /* AWSRuntime.framework in Frameworks */,
 				52F26E961800B28400480818 /* libz.dylib in Frameworks */,
 				52F26E9E1800D03200480818 /* AWSEC2.framework in Frameworks */,
+				412815DA1800E7D4008071D2 /* GoogleMaps.framework in Frameworks */,
 				52F26E941800B27D00480818 /* libicucore.dylib in Frameworks */,
 				52F26E921800B27600480818 /* libc++.dylib in Frameworks */,
 				52F26E901800B26D00480818 /* ImageIO.framework in Frameworks */,
@@ -111,7 +112,6 @@
 				52F26E861800B24E00480818 /* AVFoundation.framework in Frameworks */,
 				52F26E4C1800AACD00480818 /* CoreGraphics.framework in Frameworks */,
 				52F26E4E1800AACD00480818 /* UIKit.framework in Frameworks */,
-				52F26E821800B1D700480818 /* GoogleMaps.framework in Frameworks */,
 				52F26E4A1800AACD00480818 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -151,6 +151,8 @@
 		52F26E481800AACD00480818 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				412815DB1800E7DB008071D2 /* GoogleMaps */,
+				412815D91800E7D4008071D2 /* GoogleMaps.framework */,
 				52F26E9F1800D21A00480818 /* AWSRuntime.framework */,
 				52F26E9D1800D03200480818 /* AWSEC2.framework */,
 				52F26E9B1800B29900480818 /* SystemConfiguration.framework */,
@@ -165,8 +167,6 @@
 				52F26E891800B25C00480818 /* CoreLocation.framework */,
 				52F26E871800B25500480818 /* CoreData.framework */,
 				52F26E851800B24E00480818 /* AVFoundation.framework */,
-				52F26E831800B23200480818 /* GoogleMaps.bundle */,
-				52F26E811800B1D700480818 /* GoogleMaps.framework */,
 				52F26E491800AACD00480818 /* Foundation.framework */,
 				52F26E4B1800AACD00480818 /* CoreGraphics.framework */,
 				52F26E4D1800AACD00480818 /* UIKit.framework */,
@@ -296,10 +296,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				412815DC1800E7DB008071D2 /* GoogleMaps in Resources */,
 				52F26E651800AACD00480818 /* Images.xcassets in Resources */,
 				52F26E541800AACD00480818 /* InfoPlist.strings in Resources */,
 				52F26E5D1800AACD00480818 /* Main.storyboard in Resources */,
-				52F26E841800B23200480818 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,10 +454,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/john/Desktop/SafeRoute,
+					/Users/surabhigupta/Developer/SafeRoute,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SafeRoute/SafeRoute-Prefix.pch";
 				INFOPLIST_FILE = "SafeRoute/SafeRoute-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/surabhigupta/Developer/SafeRoute/GoogleMaps.framework,
+					"/Users/surabhigupta/Downloads/GoogleMaps-iOS-1.5.0/GoogleMaps.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -471,10 +477,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					/Users/john/Desktop/SafeRoute,
+					/Users/surabhigupta/Developer/SafeRoute,
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SafeRoute/SafeRoute-Prefix.pch";
 				INFOPLIST_FILE = "SafeRoute/SafeRoute-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					/Users/surabhigupta/Developer/SafeRoute/GoogleMaps.framework,
+					"/Users/surabhigupta/Downloads/GoogleMaps-iOS-1.5.0/GoogleMaps.framework/Versions/A",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -541,6 +553,7 @@
 				52F26E7D1800AACD00480818 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		52F26E7E1800AACD00480818 /* Build configuration list for PBXNativeTarget "SafeRouteTests" */ = {
 			isa = XCConfigurationList;
@@ -549,6 +562,7 @@
 				52F26E801800AACD00480818 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

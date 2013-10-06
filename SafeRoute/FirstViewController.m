@@ -21,6 +21,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:28.654601
                                                             longitude:77.234389
                                                                  zoom:10];
@@ -28,9 +29,7 @@
     gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
     [self.view addSubview:gMapView];
     // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    
-    gMapView.myLocationEnabled = YES;
+    // coordinate at zoom level 10
     
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
@@ -41,6 +40,14 @@
     UIColor *THREAT_LEVEL1_COLOR = [UIColor colorWithRed:(253/255.0f) green:(65/255.0f) blue:(1/255.0f) alpha:0.7];
     UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
 
+    [gMapView addObserver:self
+               forKeyPath:@"myLocation"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+    
+    gMapView.myLocationEnabled = YES;
+    gMapView.settings.myLocationButton = YES;
+    
     [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:750.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
     [self createCircleWithColor:THREAT_LEVEL2_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.554601,77.234389)];
 }
@@ -53,6 +60,23 @@
     [circle setRadius: radius];
     [circle setZIndex: 10];
     [circle setStrokeWidth: 1];
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
+    {
+        [self.gMapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.gMapView.myLocation.coordinate.latitude
+                                                                                 longitude:self.gMapView.myLocation.coordinate.longitude
+                                                                                      zoom:10]];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // Implement here if the view has registered KVO
+    [self.gMapView removeObserver:self forKeyPath:@"myLocation"];
 }
 
 - (void)didReceiveMemoryWarning
