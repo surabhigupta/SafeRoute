@@ -447,10 +447,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SafeRoute/SafeRoute-Prefix.pch";
 				INFOPLIST_FILE = "SafeRoute/SafeRoute-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/GoogleMaps.framework",
-					"/Users/surabhigupta/Downloads/GoogleMaps-iOS-1.5.0/GoogleMaps.framework/Versions/A",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/GoogleMaps.framework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -465,10 +462,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SafeRoute/SafeRoute-Prefix.pch";
 				INFOPLIST_FILE = "SafeRoute/SafeRoute-Info.plist";
-				LIBRARY_SEARCH_PATHS = (
-					"$(SRCROOT)/GoogleMaps.framework",
-					"/Users/surabhigupta/Downloads/GoogleMaps-iOS-1.5.0/GoogleMaps.framework/Versions/A",
-				);
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/GoogleMaps.framework";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
