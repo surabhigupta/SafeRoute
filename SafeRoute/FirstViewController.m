@@ -8,8 +8,6 @@
 
 #import "FirstViewController.h"
 #import <GoogleMaps/GoogleMaps.h>
-#define ACCESS_KEY_ID          @"CHANGE ME"
-#define SECRET_KEY             @"CHANGE ME"
 
 @interface FirstViewController ()
 
@@ -21,27 +19,41 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
 	GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:28.654601
                                                             longitude:77.234389
-                                                                 zoom:10];
+                                                                 zoom:14];
+    //GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.4
+    //                                                      //  longitude:-122.15
+                          //                                       zoom:11];
     
     gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
     [self.view addSubview:gMapView];
     // Create a GMSCameraPosition that tells the map to display the
-    // coordinate -33.86,151.20 at zoom level 6.
-    
-    gMapView.myLocationEnabled = YES;
+    // coordinate at zoom level 10
     
     // Creates a marker in the center of the map.
     GMSMarker *marker = [[GMSMarker alloc] init];
-    marker.position = CLLocationCoordinate2DMake(28.654601,77.234389);
+    marker.position = CLLocationCoordinate2DMake(28.657821,77.230141);
     marker.title = @"Chandni Chowk Area";
     marker.snippet = @"India";
     marker.map = gMapView;
     UIColor *THREAT_LEVEL1_COLOR = [UIColor colorWithRed:(253/255.0f) green:(65/255.0f) blue:(1/255.0f) alpha:0.7];
     UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
 
+<<<<<<< HEAD
+    [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
+=======
+    [gMapView addObserver:self
+               forKeyPath:@"myLocation"
+                  options:NSKeyValueObservingOptionNew
+                  context:NULL];
+    
+    gMapView.myLocationEnabled = YES;
+    gMapView.settings.myLocationButton = YES;
+    
     [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:750.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
+>>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
     [self createCircleWithColor:THREAT_LEVEL2_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.554601,77.234389)];
 }
 
@@ -55,68 +67,75 @@
     [circle setStrokeWidth: 1];
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
+    {
+        [self.gMapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.gMapView.myLocation.coordinate.latitude
+                                                                                 longitude:self.gMapView.myLocation.coordinate.longitude
+                                                                                      zoom:10]];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    // Implement here if the view has registered KVO
+    [self.gMapView removeObserver:self forKeyPath:@"myLocation"];
+}
+
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(IBAction)map:(id)sender
 {
-    CLGeocoder *geocoder1 = [[CLGeocoder alloc] init];
-    CLGeocoder *geocoder2 = [[CLGeocoder alloc] init];
+    [self.view endEditing:YES];
+    for (GMSPolyline *pline in [gMapView polylines]) {
+        pline.map = nil;
+    }
     NSString *locationName = [locationField text];
     NSString *destinationName = [destinationField text];
     NSLog(@"locName: %@", locationName);
     NSLog(@"destName: %@", destinationName);
-    //__block NSArray *locationMarks = [[NSArray alloc] init];
-    //__block NSArray *destinationMarks = [[NSArray alloc] init];
-    __block CLPlacemark *placemarkA;
-    __block CLPlacemark *placemarkB;
     
-    [geocoder1 geocodeAddressString:locationName completionHandler:^(NSArray *placemarks, NSError *error) {
-        placemarkA = [placemarks objectAtIndex:0];
-    }];
-    [geocoder2 geocodeAddressString:destinationName completionHandler:^(NSArray *placemarks, NSError *error) {
-        placemarkB = [placemarks objectAtIndex:0];
-    }];
-    CLLocationCoordinate2D locA = placemarkA.location.coordinate;
-    CLLocationCoordinate2D locB = placemarkB.location.coordinate;
+    NSString *url = [NSString stringWithFormat:@"http://10.34.172.50:8080/SafeRouteWeb/SafeServletAPI?origin=%@&destination=%@&mode=walking", [locationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [destinationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"url: %@", url);
+    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
+    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil] : nil;
+    NSMutableArray *legs = [results objectForKey:@"legs"];
+    NSMutableArray *steps = [[legs objectAtIndex:0] objectForKey:@"steps"];
+    for(int i = 0; i<steps.count;i++){
+        [self addPolyLineFromString:[[[steps objectAtIndex:i] objectForKey:@"polyline"] objectForKey:@"points"] andColor:[UIColor blueColor]];
+        //NSLog(@"Start %@", [[steps objectAtIndex:i] objectForKey:@"start_location"]);
+        //NSLog(@"End %@"  , [[steps objectAtIndex:i] objectForKey:@"end_location"  ]);
+    }
     
-    
-//    NSData *jsonData = [[NSString stringWithContentsOfURL:[NSURL URLWithString:query] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
-//    NSDictionary *results = jsonData ? [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:nil] : nil;
-//    NSMutableArray *ad = [results objectForKey:@"routes"];
-//    NSMutableArray *legs = [[ad objectAtIndex:0] objectForKey:@"legs"];
-//    NSMutableArray *steps = [[legs objectAtIndex:0] objectForKey:@"steps"];
-//    //    NSLog(@"Data3 %@", data3);
-//    for(int i = 0; i<steps.count;i++){
-//        NSLog(@"Start %@", [[steps objectAtIndex:i] objectForKey:@"start_location"]);
-//        NSLog(@"End %@", [[steps objectAtIndex:i] objectForKey:@"end_location"]);
-//    }
-    GMSMutablePath *path = [[GMSMutablePath alloc] init];
-    [path addCoordinate:CLLocationCoordinate2DMake(37.36, -122.1)];
-    [path addCoordinate:CLLocationCoordinate2DMake(37.40, -122.12)];
-    [path addCoordinate:CLLocationCoordinate2DMake(37.45, -122.13)];
-    [path addCoordinate:CLLocationCoordinate2DMake(37.47, -122.145)];
-    [path addCoordinate:CLLocationCoordinate2DMake(37.48, -122.15)];
-    
-    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
-    
-    polyline.map = gMapView;
-
+    //////////
+    NSString *url2 = [NSString stringWithFormat:@"http://maps.googleapis.com/maps/api/directions/json?origin=%@&destination=%@&mode=walking&sensor=false", [locationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], [destinationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]];
+    NSLog(@"url: %@", url2);
+    NSData *jsonData2 = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url2] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
+    NSMutableDictionary *data = jsonData2 ? [NSJSONSerialization JSONObjectWithData:jsonData2 options:0 error:nil] : nil;
+    NSLog(@"data: %@", data);
+    //NSLog(@"results: %@", results);
+    //NSMutableDictionary *data1 = [data objectFromJSONData];
+    NSMutableArray *ad = [data objectForKey:@"routes"];
+    NSMutableArray *data2 = [[ad objectAtIndex:0] objectForKey:@"legs"];
+    NSMutableArray *steps2 = [[data2 objectAtIndex:0] objectForKey:@"steps"];
+    //NSLog(@"steps: %@", steps);
+    for(int i = 0; i<steps2.count;i++){
+        [self addPolyLineFromString:[[[steps2 objectAtIndex:i] objectForKey:@"polyline"] objectForKey:@"points"] andColor:[UIColor redColor]];
+    }
 }
 
--(void) addPolyLineFromString:(NSString*)string
+-(void) addPolyLineFromString:(NSString*)string andColor: (UIColor*) color
 {
+    //NSLog(@"adding polyline: %@", string);
     const char *bytes = [string UTF8String];
     NSUInteger length = [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger idx = 0;
-    
-    //NSUInteger count = length / 4;
-    //CLLocationCoordinate2D *coords = calloc(count, sizeof(CLLocationCoordinate2D));
     GMSMutablePath *path = [[GMSMutablePath alloc] init];
-    //NSUInteger coordIdx = 0;
     
     float latitude = 0;
     float longitude = 0;
@@ -152,15 +171,11 @@
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(finalLat, finalLon);
         //coords[coordIdx++] = coord;
         [path addCoordinate:coord];
-        
-//        if (coordIdx == count) {
-//            NSUInteger newCount = count + 10;
-//            coords = realloc(coords, newCount * sizeof(CLLocationCoordinate2D));
-//            count = newCount;
-//        }
     }
-    //Polyline *polyline = [MKPolyline polylineWithCoordinates:coords count:coordIdx]; free(coords);
-    GMSPolyline *polyline = [GMSPolyline polylineWithPath:path];
+    //polyline.map = nil;
+    polyline = [GMSPolyline polylineWithPath:path];
+    polyline.strokeColor = color;
+    [polyline setStrokeWidth:5.0];
     polyline.map = gMapView;
 }
 
