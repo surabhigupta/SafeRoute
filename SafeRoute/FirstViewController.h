@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import <GoogleMaps/GoogleMaps.h>
 
-@interface FirstViewController : UIViewController {
+@interface FirstViewController : UIViewController <UITextViewDelegate> {
     //GMSMapView *mapView_;
+    GMSPolyline *polyline;
 }
 
 @property (nonatomic, retain) GMSMapView *gMapView;
