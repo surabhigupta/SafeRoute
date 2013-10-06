@@ -40,14 +40,13 @@
     marker.map = gMapView;
     UIColor *THREAT_LEVEL1_COLOR = [UIColor colorWithRed:(253/255.0f) green:(65/255.0f) blue:(1/255.0f) alpha:0.7];
     UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
-    [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
-    [gMapView addObserver:self
-               forKeyPath:@"myLocation"
-                  options:NSKeyValueObservingOptionNew
-                  context:NULL];
-    
-    gMapView.myLocationEnabled = YES;
-    gMapView.settings.myLocationButton = YES;
+//    [gMapView addObserver:self
+//               forKeyPath:@"myLocation"
+//                  options:NSKeyValueObservingOptionNew
+//                  context:NULL];
+//    
+//    gMapView.myLocationEnabled = YES;
+//    gMapView.settings.myLocationButton = YES;
     
     [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
     [self createCircleWithColor:THREAT_LEVEL2_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.554601,77.234389)];
@@ -63,21 +62,21 @@
     [circle setStrokeWidth: 1];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
-    {
-        [self.gMapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.gMapView.myLocation.coordinate.latitude
-                                                                           longitude:self.gMapView.myLocation.coordinate.longitude
-                                                                                zoom:10]];
-    }
-}
+//- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+//{
+//    if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
+//    {
+//        [self.gMapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.gMapView.myLocation.coordinate.latitude
+//                                                                           longitude:self.gMapView.myLocation.coordinate.longitude
+//                                                                                zoom:10]];
+//    }
+//}
 
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:animated];
     // Implement here if the view has registered KVO
-    [self.gMapView removeObserver:self forKeyPath:@"myLocation"];
+    //[self.gMapView removeObserver:self forKeyPath:@"myLocation"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -104,8 +103,6 @@
     NSMutableArray *steps = [[legs objectAtIndex:0] objectForKey:@"steps"];
     for(int i = 0; i<steps.count;i++){
         [self addPolyLineFromString:[[[steps objectAtIndex:i] objectForKey:@"polyline"] objectForKey:@"points"] andColor:[UIColor blueColor]];
-        //NSLog(@"Start %@", [[steps objectAtIndex:i] objectForKey:@"start_location"]);
-        //NSLog(@"End %@"  , [[steps objectAtIndex:i] objectForKey:@"end_location"  ]);
     }
     
     //////////
@@ -114,12 +111,9 @@
     NSData *jsonData2 = [[NSString stringWithContentsOfURL:[NSURL URLWithString:url2] encoding:NSUTF8StringEncoding error:nil] dataUsingEncoding:NSUTF8StringEncoding];
     NSMutableDictionary *data = jsonData2 ? [NSJSONSerialization JSONObjectWithData:jsonData2 options:0 error:nil] : nil;
     NSLog(@"data: %@", data);
-    //NSLog(@"results: %@", results);
-    //NSMutableDictionary *data1 = [data objectFromJSONData];
     NSMutableArray *ad = [data objectForKey:@"routes"];
     NSMutableArray *data2 = [[ad objectAtIndex:0] objectForKey:@"legs"];
     NSMutableArray *steps2 = [[data2 objectAtIndex:0] objectForKey:@"steps"];
-    //NSLog(@"steps: %@", steps);
     for(int i = 0; i<steps2.count;i++){
         [self addPolyLineFromString:[[[steps2 objectAtIndex:i] objectForKey:@"polyline"] objectForKey:@"points"] andColor:[UIColor redColor]];
     }
@@ -127,7 +121,6 @@
 
 -(void) addPolyLineFromString:(NSString*)string andColor: (UIColor*) color
 {
-    //NSLog(@"adding polyline: %@", string);
     const char *bytes = [string UTF8String];
     NSUInteger length = [string lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
     NSUInteger idx = 0;
@@ -139,7 +132,6 @@
         char byte = 0;
         int res = 0;
         char shift = 0;
-        
         do {
             byte = bytes[idx++] - 63;
             res |= (byte & 0x1F) << shift;
@@ -165,7 +157,6 @@
         float finalLon = longitude * 1E-5;
         
         CLLocationCoordinate2D coord = CLLocationCoordinate2DMake(finalLat, finalLon);
-        //coords[coordIdx++] = coord;
         [path addCoordinate:coord];
     }
     polyline = [GMSPolyline polylineWithPath:path];
