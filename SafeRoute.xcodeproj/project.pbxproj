@@ -95,14 +95,8 @@
 				52F26E9A1800B29200480818 /* QuartzCore.framework in Frameworks */,
 				52F26E981800B28A00480818 /* OpenGLES.framework in Frameworks */,
 				52F26E961800B28400480818 /* libz.dylib in Frameworks */,
-<<<<<<< HEAD
-=======
 				52F26E9E1800D03200480818 /* AWSEC2.framework in Frameworks */,
 				412815DA1800E7D4008071D2 /* GoogleMaps.framework in Frameworks */,
-<<<<<<< HEAD
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
-=======
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
 				52F26E941800B27D00480818 /* libicucore.dylib in Frameworks */,
 				52F26E921800B27600480818 /* libc++.dylib in Frameworks */,
 				52F26E901800B26D00480818 /* ImageIO.framework in Frameworks */,
@@ -152,16 +146,10 @@
 		52F26E481800AACD00480818 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
 				412815DB1800E7DB008071D2 /* GoogleMaps */,
 				412815D91800E7D4008071D2 /* GoogleMaps.framework */,
 				52F26E9F1800D21A00480818 /* AWSRuntime.framework */,
 				52F26E9D1800D03200480818 /* AWSEC2.framework */,
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
 				52F26E9B1800B29900480818 /* SystemConfiguration.framework */,
 				52F26E991800B29100480818 /* QuartzCore.framework */,
 				52F26E971800B28A00480818 /* OpenGLES.framework */,
