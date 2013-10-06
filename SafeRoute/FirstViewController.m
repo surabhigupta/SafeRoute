@@ -25,7 +25,7 @@
                                                                  zoom:14];
     //GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:37.4
     //                                                      //  longitude:-122.15
-                          //                                       zoom:11];
+    //                                       zoom:11];
     
     gMapView = [GMSMapView mapWithFrame:CGRectMake(0, 130, self.view.frame.size.width, self.view.frame.size.height-150) camera:camera];
     [self.view addSubview:gMapView];
@@ -40,13 +40,7 @@
     marker.map = gMapView;
     UIColor *THREAT_LEVEL1_COLOR = [UIColor colorWithRed:(253/255.0f) green:(65/255.0f) blue:(1/255.0f) alpha:0.7];
     UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
-
-<<<<<<< HEAD
-<<<<<<< HEAD
     [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
-=======
-=======
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
     [gMapView addObserver:self
                forKeyPath:@"myLocation"
                   options:NSKeyValueObservingOptionNew
@@ -55,8 +49,7 @@
     gMapView.myLocationEnabled = YES;
     gMapView.settings.myLocationButton = YES;
     
-    [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:750.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
->>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
+    [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
     [self createCircleWithColor:THREAT_LEVEL2_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.554601,77.234389)];
 }
 
@@ -75,8 +68,8 @@
     if ([keyPath isEqualToString:@"myLocation"] && [object isKindOfClass:[GMSMapView class]])
     {
         [self.gMapView animateToCameraPosition:[GMSCameraPosition cameraWithLatitude:self.gMapView.myLocation.coordinate.latitude
-                                                                                 longitude:self.gMapView.myLocation.coordinate.longitude
-                                                                                      zoom:10]];
+                                                                           longitude:self.gMapView.myLocation.coordinate.longitude
+                                                                                zoom:10]];
     }
 }
 
@@ -175,7 +168,6 @@
         //coords[coordIdx++] = coord;
         [path addCoordinate:coord];
     }
-    //polyline.map = nil;
     polyline = [GMSPolyline polylineWithPath:path];
     polyline.strokeColor = color;
     [polyline setStrokeWidth:5.0];
