@@ -42,8 +42,11 @@
     UIColor *THREAT_LEVEL2_COLOR = [UIColor colorWithRed:(230/255.0f) green:(98/255.0f) blue:(11/255.0f) alpha:0.5];
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     [self createCircleWithColor:THREAT_LEVEL1_COLOR withRadius:500.00 atPosition:CLLocationCoordinate2DMake(28.654601,77.234389)];
 =======
+=======
+>>>>>>> 7f06051390aa1a71afc5b40d394895ce9eb0f5f4
     [gMapView addObserver:self
                forKeyPath:@"myLocation"
                   options:NSKeyValueObservingOptionNew
